@@ -1,0 +1,41 @@
+body {
+  background-color: black;
+}
+
+.newReleases-main h1 {
+  font-family: 'comfortaa', cursive;
+  color: #FFFFFF;
+  margin: 10px 0 0 20px;
+}
+
+.newMovies-container {
+  overflow-x: scroll;
+  overflow-y: hidden;
+  white-space: nowrap;
+  font-family: 'Lato', sans-serif;
+  color: #FFFFFF;
+}
+
+.newMovie {
+  display: inline-block;
+  text-align: center;
+  margin: 15px 4px;
+  transition: all .4s ease-in-out;
+}
+
+.newMovie:hover {
+  transform: scale(1.05);
+}
+
+.newMovie img {
+  width: 200px;
+}
+
+.newMovie h3 {
+  height: 67px;
+  width: 180px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: #FFFFFF;
+}
