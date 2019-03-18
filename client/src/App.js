@@ -6,21 +6,21 @@ import MovieInfo from './Components/MovieInfo';
 
 class App extends Component {
   state = {
-    searchResults: ''
+    title: ''
   }
 
-  updateSearchResults = (results) => {
-    this.setState({searchResults: results });
-    console.log(this.state.searchResults)
+  updateTitle = (results) => {
+    this.setState({title: results });
+    console.log(this.state.title)
   }
 
   render() {
-    const {searchResults} = this.state;
+    const {title} = this.state;
     return (
       <div className="App">
-        <Search updateSearchResults={this.updateSearchResults}/>
-        {searchResults === '' && <NewReleases/>}
-        {searchResults !== '' && <MovieInfo results={searchResults}/>}
+        <Search updateTitle={this.updateTitle}/>
+        {title === '' && <NewReleases/>}
+        {title !== '' && <MovieInfo title={title}/>}
       </div>
     );
   }
