@@ -8,8 +8,11 @@ class Search extends Component {
         const {input} = this.state;
         return (
             <div>
-                <input type='text' onChange={(e) => this.setState({input: e.target.value})}/>
-                <input type='submit' onClick={(e) => this.props.updateTitle(input)}/>
+                <input type='text' onChange={(e) => {
+                    this.setState({input: e.target.value})
+                    this.props.updateResults(e.target.value)
+                }}/>
+                <input type='submit' onClick={(e) => this.props.searchMovieDb(input)}/>
             </div>
         )
     }

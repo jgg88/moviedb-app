@@ -39,3 +39,35 @@ body {
   text-overflow: ellipsis;
   color: #FFFFFF;
 }
+
+.results-container {
+  margin-top: 20px;
+  color: #FFFFFF;
+  max-width: 90%;
+}
+
+.results{
+  display: flex;
+  height: 300px;
+  background-color: #a0a0a0;
+  margin: 0 auto;
+  margin-bottom: 10px;
+}
+
+.results-img {
+  height: 200px;
+}
+
+.tab-container {
+
+}
+
+.results-tab {
+  margin-left: 20px;
+  height: 45px;
+  width: 130px;
+  border-top-left-radius: 15px;
+  border-top-right-radius: 15px;
+  background-color: darkgrey;
+  display: inline-block;
+}
