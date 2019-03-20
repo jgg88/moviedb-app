@@ -41,9 +41,6 @@ class MovieInfo extends Component {
                                 <h5>{moment(details.release_date).format('MMMM DD YYYY') || 
                                 moment(details.first_air_date).format('MMMM DD YYYY')}</h5>
                                 <p>{details.overview}</p>
-                                {/* {details.first_air_date ? 
-                                    
-                                } */}
                             </div>
                         </div>
                     ))}
