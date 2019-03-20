@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import {key} from './config/keys';
 import axios from 'axios';
+import moment from 'moment';
 import NewReleases from './Components/NewReleases';
 import Search from './Components/Search';
 import MovieInfo from './Components/MovieInfo';

@@ -45,22 +45,33 @@ body {
   color: #FFFFFF;
   max-width: 90%;
   margin: 0 auto;
+  font-family: 'Lato', sans-serif;
+}
+
+.results-container h1 {
+  font-family: 'comfortaa', cursive;
 }
 
 .results{
   display: flex;
-  height: 300px;
+  min-height: 240px;
   background-color: #a0a0a0;
   margin-bottom: 10px;
+}
+
+.results:hover {
+  background-color: #929292;
 }
 
 .results-img {
   height: 200px;
   float: left;
+  margin: 20px
 }
 
 .results-details {
   float: right;
+  padding: 20px;
 }
 
 .tab-container {
@@ -87,4 +98,8 @@ body {
   border: solid #696969 2px;
   height: 200px;
   width: 130px;
+}
+
+.results h2 {
+  font-family: 'comfortaa', cursive;
 }
