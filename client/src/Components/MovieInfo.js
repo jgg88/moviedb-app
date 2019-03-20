@@ -3,7 +3,12 @@ import moment from 'moment';
 
 class MovieInfo extends Component {
 
+    state = {
+        showingSeriesResults: false
+    }
+
     render() {
+        const {showingSeriesResults} = this.state;
         const {movie, results, title} = this.props;
         return (
             <div>
@@ -16,18 +21,28 @@ class MovieInfo extends Component {
                 {results && <div className='results-container'>
                     <h1>Results</h1>
                     <div className='tab-container'>
-                        <div className='results-tab' onClick={() => this.props.searchMovieDb(title)}>Movies</div>
-                        <div className='results-tab' onClick={() => this.props.searchForShows(title)}>Series</div>
+                        <div className={!showingSeriesResults ? 'results-tab-active' : 'results-tab'} onClick={() => {
+                            this.props.searchMovieDb(title)
+                            this.setState({showingSeriesResults: false})
+                        }}>Movies</div>
+                        <div className={showingSeriesResults ? 'results-tab-active' : 'results-tab'} onClick={() => {
+                            this.props.searchForShows(title)
+                            this.setState({showingSeriesResults: true})
+                        }}>Series</div>
                     </div>
                     
                     {results.map(details => (
                         <div key ={details.id} style={{color: 'white'}} className='results'>
-                            <img src={`https://image.tmdb.org/t/p/w500${details.poster_path}`} className='results-img'/>
-                            <p>{details.title || details.name}</p>
-                            {details.first_air_date ? 
-                                <h2>TV Show</h2> :
-                                <h2>Movie</h2>
+                            {details.poster_path ?
+                                <img src={`https://image.tmdb.org/t/p/w500${details.poster_path}`} className='results-img'/> : <div className='results-img results-placeholder'/>
                             }
+                            <div className='results-details'>
+                                <h2>{details.title || details.name}</h2>
+                                <p>{details.overview}</p>
+                                {/* {details.first_air_date ? 
+                                    
+                                } */}
+                            </div>
                         </div>
                     ))}
                 </div>}

@@ -20,7 +20,6 @@ class App extends Component {
   }
 
   searchMovieDb = (title) => {
-
     let formattedTitle = [];
     title.split('').forEach(letter => {
         if (letter !== ' ') {
