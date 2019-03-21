@@ -4,12 +4,13 @@ import moment from 'moment';
 class MovieInfo extends Component {
 
     state = {
-        showingSeriesResults: false
+        showingSeriesResults: false,
     }
 
     render() {
         const {showingSeriesResults} = this.state;
-        const {movie, results, title, totalPages} = this.props;
+        const {movie, results, title, totalPages, currentPage} = this.props;
+
         return (
             <div>
                 {!results && <div style={{color:'white'}}>
@@ -19,7 +20,6 @@ class MovieInfo extends Component {
                 </div>}
                 
                 {results && <div className='results-container'>
-                    <h1>Results</h1>
                     <div className='tab-container'>
                         <div className={!showingSeriesResults ? 'results-tab-active' : 'results-tab'} onClick={() => {
                             this.props.searchMovieDb(title)
@@ -29,12 +29,26 @@ class MovieInfo extends Component {
                             this.props.searchForShows(title)
                             this.setState({showingSeriesResults: true})
                         }}>Series</div>
+                        <h1>Results</h1>
                     </div>
-                                 
+
+                    <div className='pagination-container'>
+                        {totalPages.map(page => 
+                            <button 
+                                key={page} 
+                                onClick={() => {
+                                    !showingSeriesResults 
+                                    ? this.props.searchMovieDb(title, page) : 
+                                    this.props.searchForShows(title, page)
+                                }}
+                                className={currentPage === page ? 'page-button-active' : 'page-button'}
+                            >{page}</button>
+                        )}
+                    </div>
                     {results.map(details => (
                         <div key ={details.id} style={{color: 'white'}} className='results'>
                             {details.poster_path ?
-                                <img src={`https://image.tmdb.org/t/p/w500${details.poster_path}`} className='results-img'/> : <div className='results-img results-placeholder'/>
+                                <img src={`https://image.tmdb.org/t/p/w500${details.poster_path}`} className='results-img' alt='movie poster'/> : <div className='results-img results-placeholder'/>
                             }
                             <div className='results-details'>
                                 <h2>{details.title || details.name}</h2>

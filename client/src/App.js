@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import './App.css';
 import {key} from './config/keys';
 import axios from 'axios';
-import moment from 'moment';
 import NewReleases from './Components/NewReleases';
 import Search from './Components/Search';
 import MovieInfo from './Components/MovieInfo';
@@ -12,7 +11,8 @@ class App extends Component {
     title: '',
     results: [],
     hasFetchedTitle: false,
-    totalPages: null
+    totalPages: [],
+    currentPage: 1
   }
 
   updateResults = (input) => {
@@ -35,30 +35,29 @@ class App extends Component {
     const url = `https://api.themoviedb.org/3/search/movie?api_key=${key}&query=${title}&page=${pageNumber}`;
     axios.get(url)
         .then(res =>  {
-          console.log(res)
-            let sortedResults = res.data.results.sort(this.sortDate)
-            console.log(sortedResults)
+            let sortedResults = res.data.results.sort(this.sortDate);
+            let seasonArray = Array.from({length: res.data.total_pages}, (v, i) => i+1);
             this.setState({
               results: sortedResults, 
               title: title, 
               hasFetchedTitle: true,
-              totalPages: res.data.total_pages
+              totalPages: seasonArray,
+              currentPage: pageNumber
             })
         })
         .catch(err => console.log(err));
-    console.log(this.state.results)
   }
 
   searchForShows = (title, pageNumber = 1) => {
       const url = `https://api.themoviedb.org/3/search/tv?api_key=${key}&query=${title}&page=${pageNumber}`
       axios.get(url)
           .then(res => {
-              console.log('TV show results: ', res.data.results)
+              let seasonArray = Array.from({length: res.data.total_pages}, (v, i) => i+1);
               this.setState({
                 results: res.data.results,
                 hasFetchedTitle: true,
-                // currentPage: pageNumber,
-                totalPages: res.data.total_pages
+                totalPages: seasonArray,
+                currentPage: pageNumber
               })
           });
   }
@@ -79,7 +78,7 @@ class App extends Component {
   }
 
   render() {
-    const {title, results, hasFetchedTitle, totalPages} = this.state;
+    const {title, results, hasFetchedTitle, totalPages, currentPage} = this.state;
     return (
       <div className="App">
         <Search 
@@ -95,6 +94,7 @@ class App extends Component {
           searchMovieDb={this.searchMovieDb}
           searchForShows={this.searchForShows}
           totalPages={totalPages}
+          currentPage={currentPage}
         />}
       </div>
     );
