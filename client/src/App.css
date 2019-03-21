@@ -1,5 +1,39 @@
 body {
-  background-color: black;
+  background-color: #779ca0;
+  margin: 0 auto;
+}
+
+.header {
+  width: 100%;
+  background-color: #2b4346;
+  height: 80px;
+}
+
+.header h1 {
+  float: left;
+  color: #FFFFFF;
+  font-family: 'comfortaa', cursive;
+  margin-left: 40px;
+}
+
+.search-container {
+  float: right;
+}
+
+.search-input {
+  height: 25px;
+  width: 200px;
+  border-style: unset;
+  border-radius: 3px;
+}
+
+.search-button {
+  height: 26px;
+  margin: 25px 15px 0 10px;
+  color: #FFFFFF;
+  background-color: coral;
+  border-style: unset;
+  border-radius: 5px;
 }
 
 .newReleases-main h1 {
@@ -55,12 +89,12 @@ body {
 .results{
   display: flex;
   min-height: 240px;
-  background-color: #a0a0a0;
+  background-color: #406469;
   margin-bottom: 10px;
 }
 
 .results:hover {
-  background-color: #929292;
+  background-color: #3b5c60;
 }
 
 .results-img {
@@ -85,13 +119,13 @@ body {
   text-align: center;
   border-top-left-radius: 15px;
   border-top-right-radius: 15px;
-  background-color: #696969;
+  background-color: #2b4346;
   display: inline-block;
   padding: 15px;
 }
 
 .results-tab-active {
-  background-color: #a0a0a0;
+  background-color: #406469;
 }
 
 .results-placeholder {

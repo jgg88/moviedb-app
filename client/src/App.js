@@ -11,7 +11,8 @@ class App extends Component {
   state = {
     title: '',
     results: [],
-    hasFetchedTitle: false
+    hasFetchedTitle: false,
+    totalPages: null
   }
 
   updateResults = (input) => {
@@ -20,7 +21,7 @@ class App extends Component {
     }
   }
 
-  searchMovieDb = (title) => {
+  searchMovieDb = (title, pageNumber = 1) => {
     let formattedTitle = [];
     title.split('').forEach(letter => {
         if (letter !== ' ') {
@@ -31,23 +32,34 @@ class App extends Component {
     });
     title = formattedTitle.join('');
     
-    const url = `https://api.themoviedb.org/3/search/movie?api_key=${key}&query=${title}`;
+    const url = `https://api.themoviedb.org/3/search/movie?api_key=${key}&query=${title}&page=${pageNumber}`;
     axios.get(url)
         .then(res =>  {
+          console.log(res)
             let sortedResults = res.data.results.sort(this.sortDate)
             console.log(sortedResults)
-            this.setState({results: sortedResults, title: title, hasFetchedTitle: true})
+            this.setState({
+              results: sortedResults, 
+              title: title, 
+              hasFetchedTitle: true,
+              totalPages: res.data.total_pages
+            })
         })
         .catch(err => console.log(err));
     console.log(this.state.results)
   }
 
-  searchForShows = (title) => {
-      const url = `https://api.themoviedb.org/3/search/tv?api_key=${key}&query=${title}`
+  searchForShows = (title, pageNumber = 1) => {
+      const url = `https://api.themoviedb.org/3/search/tv?api_key=${key}&query=${title}&page=${pageNumber}`
       axios.get(url)
           .then(res => {
               console.log('TV show results: ', res.data.results)
-              this.setState({results: res.data.results, hasFetchedTitle: true})
+              this.setState({
+                results: res.data.results,
+                hasFetchedTitle: true,
+                // currentPage: pageNumber,
+                totalPages: res.data.total_pages
+              })
           });
   }
 
@@ -67,7 +79,7 @@ class App extends Component {
   }
 
   render() {
-    const {title, results, hasFetchedTitle} = this.state;
+    const {title, results, hasFetchedTitle, totalPages} = this.state;
     return (
       <div className="App">
         <Search 
@@ -82,6 +94,7 @@ class App extends Component {
           title={title}
           searchMovieDb={this.searchMovieDb}
           searchForShows={this.searchForShows}
+          totalPages={totalPages}
         />}
       </div>
     );

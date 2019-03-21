@@ -9,7 +9,7 @@ class MovieInfo extends Component {
 
     render() {
         const {showingSeriesResults} = this.state;
-        const {movie, results, title} = this.props;
+        const {movie, results, title, totalPages} = this.props;
         return (
             <div>
                 {!results && <div style={{color:'white'}}>
@@ -30,7 +30,7 @@ class MovieInfo extends Component {
                             this.setState({showingSeriesResults: true})
                         }}>Series</div>
                     </div>
-                    
+                                 
                     {results.map(details => (
                         <div key ={details.id} style={{color: 'white'}} className='results'>
                             {details.poster_path ?
