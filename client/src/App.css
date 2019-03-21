@@ -78,6 +78,18 @@ button:focus {
   color: #FFFFFF;
 }
 
+.movie-info-container {
+  display: flex;
+  min-height: 240px;
+  font-family: 'comfortaa', cursive;
+  background-color: #406469;
+  margin: 20px;
+}
+
+.movie-info-container p {
+  font-family: 'Lato', sans-serif;
+}
+
 .results-container {
   margin-top: 20px;
   color: #FFFFFF;

@@ -13,13 +13,21 @@ class MovieInfo extends Component {
 
         return (
             <div>
-                {!results && <div style={{color:'white'}}>
-                    <h1>{movie.title}</h1>
-                    <p>released: {moment(movie.release_date).format('MMMM DD, YYYY')}</p>
-                    <p>{movie.overview}</p>
+                {!results && 
+                <div key ={movie.id} style={{color: 'white'}} className='movie-info-container'>
+                    {movie.poster_path ?
+                        <img src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`} className='results-img' alt='movie poster'/> : <div className='results-img results-placeholder'/>
+                    }
+                    <div className='results-details'>
+                        <h2>{movie.title || movie.name}</h2>
+                        <p>{moment(movie.release_date).format('MMMM DD YYYY') || 
+                        moment(movie.first_air_date).format('MMMM DD YYYY')}</p>
+                        <p>{movie.overview}</p>
+                    </div>
                 </div>}
                 
-                {results && <div className='results-container'>
+                {results && 
+                <div className='results-container'>
                     <div className='tab-container'>
                         <div className={!showingSeriesResults ? 'results-tab-active' : 'results-tab'} onClick={() => {
                             this.props.searchMovieDb(title)
